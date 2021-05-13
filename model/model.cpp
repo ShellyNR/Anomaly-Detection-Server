@@ -16,21 +16,51 @@
     using v8::Value;
     using v8::Array;
     using v8::Exception;
+    using namespace std; //for the strings
 
     void Method(const FunctionCallbackInfo<Value>&args) /*needs to have exactly that as the argument*/ { 
         Isolate* isolate = args.GetIsolate(); // just do if you need isolate somewhere like NewFromUTF8, see below
 
-        int i;
-        double x= 123.478;
-        double y = 4.50;
+        // All v8 objects are accessed using locals, they are necessary because of the way the v8 garbage collector works
+        Local<Context> context = isolate->GetCurrentContext();
 
-        for (i=0; i<10000000; i++){
-            x+=y;
+        Local<Object> obj = Object::New(isolate);
+
+        // passing integers from the controller to the model
+
+        int someInt = (int)args[2].As<Number>()->Value();
+
+        if (someInt == 1) {
+
+            // passing string from the controller to the model
+            // ToLocalChecked() is simply going to convert the result into v8's Local
+
+            Local<String> arg0 = args[0]->ToString(context).ToLocalChecked();
+
+            // passing string from the model to the controller using an object
+
+            obj->Set(context, String::NewFromUtf8(isolate,"msg").ToLocalChecked(),
+                               arg0).FromJust();
+
+
         }
 
+        if (someInt == 2) {
 
-        auto total = Number::New(isolate, x);
-        args.GetReturnValue().Set(total);
+            obj->Set(context, String::NewFromUtf8(isolate,"msg").ToLocalChecked(),
+                               args[1]->ToString(context).ToLocalChecked()).FromJust();
+
+
+        }
+
+        
+
+        args.GetReturnValue().Set(obj);
+
+
+        //auto total = Number::New(isolate, someInt);        
+
+        //args.GetReturnValue().Set(total);
 
     }
 
