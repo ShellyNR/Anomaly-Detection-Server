@@ -1,6 +1,8 @@
 const express = require('express')
 const fileUpload = require ('express-fileupload')
 const app = express()
+const api = require('C:\\Users\\Shelly Nahir\\Desktop\\uni\\ass5\\model\\build\\Release\\model')
+
 
 app.use(express.static('../view'))
 app.use(fileUpload())
@@ -16,6 +18,7 @@ app.get('/', (req, res)=> {
 
 app.post('/upload',(req, res) => {
     res.write('Processing')
+    res.write(api.calc().toString())
     if (req.files.TrainFile != null && req.files.TestFile != null) {
         var train = req.files.TrainFile
         var test = req.files.TestFile
