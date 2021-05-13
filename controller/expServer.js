@@ -17,13 +17,16 @@ app.get('/', (req, res)=> {
 })
 
 app.post('/upload',(req, res) => {
-    res.write('Processing')
+    //res.write('Processing')
+    res.write(api.calc("the input is 1", "the input is 2", 2).msg)
+    /**
     res.write(api.calc().toString())
     if (req.files.TrainFile != null && req.files.TestFile != null) {
         var train = req.files.TrainFile
         var test = req.files.TestFile
         // train.data.toString(), test.data.toString()
     }
+    *//
     res.end()
 
 })
