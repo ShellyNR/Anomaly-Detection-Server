@@ -1,8 +1,13 @@
-// #include "every cpp you need, NOT the h .cpp"
 #include <node.h>
 #include <string>
- //just put in all these usings, they're for node to use.
- namespace model {
+#include "anomaly_detection_util.h"
+#include "minCircle.h"
+#include "timeseries.h"
+#include "AnomalyDetector.h"
+#include "SimpleAnomalyDetector.h"
+#include "HybridAnomalyDetector.h"
+
+namespace model {
     using v8::Context;
     using v8::Function;
     using v8::FunctionCallbackInfo;
@@ -16,61 +21,68 @@
     using v8::Value;
     using v8::Array;
     using v8::Exception;
-    using namespace std; //for the strings
+    using namespace std;
 
-    void Method(const FunctionCallbackInfo<Value>&args) /*needs to have exactly that as the argument*/ { 
-        Isolate* isolate = args.GetIsolate(); // just do if you need isolate somewhere like NewFromUTF8, see below
-
-        // All v8 objects are accessed using locals, they are necessary because of the way the v8 garbage collector works
-        Local<Context> context = isolate->GetCurrentContext();
-
-        Local<Object> obj = Object::New(isolate);
-
-        // passing integers from the controller to the model
-
-        int someInt = (int)args[2].As<Number>()->Value();
-
-        if (someInt == 1) {
-
-            // passing string from the controller to the model
-            // ToLocalChecked() is simply going to convert the result into v8's Local
-
-            Local<String> arg0 = args[0]->ToString(context).ToLocalChecked();
-
-            // passing string from the model to the controller using an object
-
-            obj->Set(context, String::NewFromUtf8(isolate,"msg").ToLocalChecked(),
-                               arg0).FromJust();
-
-
+    void vecToJson(std::vector<AnomalyReport> aR) {
+        string jsonString = "{";
+        string key, val;
+        int vecSize = aR.size();
+        for(int i=0; i < vecSize; i++) {
+            key = aR[i].description;
+            val = to_string(aR[i].timeStep);
+            printf("key: %s, val: %s\n", key.c_str(), val.c_str());
+            if (i != vecSize - 1)
+                jsonString += "\"" +key + "\"" + ": " + "\"" + val + "\"" + ",";
+            else
+                jsonString += "\"" +key + "\"" + ": " + "\"" + val + "\"";
         }
-
-        if (someInt == 2) {
-
-            obj->Set(context, String::NewFromUtf8(isolate,"msg").ToLocalChecked(),
-                               args[1]->ToString(context).ToLocalChecked()).FromJust();
-
-
-        }
-
-        
-
-        args.GetReturnValue().Set(obj);
-
-
-        //auto total = Number::New(isolate, someInt);        
-
-        //args.GetReturnValue().Set(total);
-
+        jsonString +="}";
+        ofstream jsonFile;
+        jsonFile.open ("../files/anomaly-report.json");
+        jsonFile << jsonString;
+        jsonFile.close();
     }
 
+    void Method(const FunctionCallbackInfo<Value>&args) { 
+        Isolate* isolate = args.GetIsolate(); 
 
-    // Initialize write exactly as is, NODE_SET_METHOD have the 2nd arg be the name you want to use in JS and the 3rd arg is the function here
+        Local<Context> context = isolate->GetCurrentContext();
+        Local<Object> obj = Object::New(isolate);
+
+        //------------------------------------------------------------//
+        // passing integer from controller to model
+        int simpleHybridFlag = (int)args[2].As<Number>()->Value();
+        //------------------------------------------------------------//
+        
+        
+        TimeSeries trainTS("./files/trainFile.csv");
+        TimeSeries testTS("./files/testFile.csv");
+
+        //----------------------------------------------------------------------------//
+        // using SimpleAnomalyDetector        
+        if (simpleHybridFlag == 1) {
+            SimpleAnomalyDetector ad;
+	        ad.learnNormal(trainTS);
+            vector<correlatedFeatures> cf=ad.getNormalModel();            
+            vector<AnomalyReport> aR = ad.detect(testTS);
+            vecToJson(aR);
+        }        
+        // using HybridAnomalyDetector
+        else if (simpleHybridFlag == 2) {            
+	        HybridAnomalyDetector ad;
+	        ad.learnNormal(trainTS);
+            vector<correlatedFeatures> cf=ad.getNormalModel();            
+            vector<AnomalyReport> aR = ad.detect(testTS);                                                
+            vecToJson(aR);
+        }
+        //----------------------------------------------------------------------------//
+
+        args.GetReturnValue().Set(obj);
+    }
+
     void Initialize(Local<Object> exports) {
         NODE_SET_METHOD(exports, "calc", Method);
     }
 
-    NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize); // this needs to be at the end, don't touch
-
-
- }
+    NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize);
+}
