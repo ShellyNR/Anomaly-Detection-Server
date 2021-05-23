@@ -1,32 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Programming</title>
-</head>
-<body>
-    <h1>Anomaly Detection Server</h1>
-    <form action="/upload" method ="POST" enctype="multipart/form-data" target="result" >
-        <table>
-            <tr>
-                <td>Train CSV:</td>
-                <td><input type="file" id="TrainFile" name="TrainFile"></td>
-            </tr>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <tr></tr>
+        <script>
+            function httpGet(theUrl)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+                xmlHttp.send( null );
+                return xmlHttp.responseText;
+            }
 
-            <tr>
-                <td>Test CSV:</td>
-                <td><input type="file" id="TestFile" name="TestFile"></td>
-            </tr>
-            <tr>
-                <td><input type="submit"></td>
-            </tr>
-        </table>
-    </form>
-    <br>
-    <iframe name="result" width=80% height=1000%></iframe>
-</body>
+            function jsonToTable(obj) {
+                var ret = "";
+                for (var o in obj) {
+                    var data = obj[o];
+                    if (typeof data !== 'object') {
+                        ret += "<li>" + o + " : " + data + "</li>";
+                    } else {
+                        ret += "<li>" + o + " : " + jsonToTable(data) + "</li>";
+                    }
+                }
+                return "<ul>" + ret + "</ul>";
+            }
+
+            onload = function() {
+                 var myjson = JSON.parse(httpGet("/anomaly"))
+                 var table = jsonToTable(myjson)
+                 document.getElementById("anomalyDetails").innerHTML = table;
+            }
+        </script>
+
+        <title>Advanced Programming</title>
+
+    </head>
+    <body>
+        <h1>Anomaly Detection Server</h1>
+        <form action="/upload" method ="POST" enctype="multipart/form-data" target="result" >
+            <table>
+                <tr>
+                    <td>Train CSV:</td>
+                    <td><input type="file" id="TrainFile" name="TrainFile"></td>
+                </tr>
+                <br>
+                <tr>
+                    <td>Test CSV:</td>
+                    <td><input type="file" id="TestFile" name="TestFile"></td>
+                </tr>
+                <tr>
+                    <label>Choose Model:</label>
+                    <select name="models" id="model">
+                        <option value="linear">Linear</option>
+                        <option value="hybrid">Hybrid</option>
+                    </select>
+                </tr>
+                <tr>
+                    <td><input type="submit"></td>
+                </tr>
+            </table>
+        </form>
+        <br>
+        <!-- <iframe name = "result" width="70%" height="300"></iframe> -->
+
+        <h1> anomaly report:</h1>
+        <font color="red">
+        <div id="anomalyDetails"></div>
+
+
+    </body>
 </html>
