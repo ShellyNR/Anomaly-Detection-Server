@@ -24,23 +24,22 @@ namespace model {
     using namespace std;
 
     void vecToJson(std::vector<AnomalyReport> aR) {
-        string jsonString = "{";
-        string key, val;
-        int vecSize = aR.size();
-        for(int i=0; i < vecSize; i++) {
-            key = aR[i].description;
-            val = to_string(aR[i].timeStep);
-            printf("key: %s, val: %s\n", key.c_str(), val.c_str());
-            if (i != vecSize - 1)
-                jsonString += "\"" +key + "\"" + ": " + "\"" + val + "\"" + ",";
-            else
-                jsonString += "\"" +key + "\"" + ": " + "\"" + val + "\"";
-        }
-        jsonString +="}";
-        ofstream jsonFile;
-        jsonFile.open ("../files/anomaly-report.json");
-        jsonFile << jsonString;
-        jsonFile.close();
+	string jsonString;
+	string key, val;
+	int vecSize = aR.size();
+	for(int i=0; i < vecSize; i++) {
+		key = aR[i].description;
+		val = to_string(aR[i].timeStep);
+		printf("key: %s, val: %s\n", key.c_str(), val.c_str());
+		if (i != vecSize - 1)
+			jsonString += "{\"" +key + "\"" + ": " + "\"" + val + "\"" + "},";
+		else
+			jsonString += "{\"" +key + "\"" + ": " + "\"" + val + "\"}";
+	}
+	ofstream myfile;
+	myfile.open ("./test/example.json");
+	myfile << jsonString;
+	myfile.close();
     }
 
     void Method(const FunctionCallbackInfo<Value>&args) { 
