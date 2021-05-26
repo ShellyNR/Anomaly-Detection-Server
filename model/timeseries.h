@@ -1,7 +1,7 @@
 /*
  * timeseries.h
  *
- *  Created on: 26 áàå÷× 2020
+ *  Created on: 26 Ã¡Ã Ã¥Ã·Ã— 2020
  *      Author: Eli
  */
 
@@ -13,7 +13,7 @@
 #include<map>
 #include <vector>
 #include <string.h>
-#include <bits/stdc++.h>
+#include <sstream>
 #include <algorithm>
 
 using namespace std;
