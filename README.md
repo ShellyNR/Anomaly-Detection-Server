@@ -6,7 +6,10 @@
 
 ## 📽️ Demonstration Video
 🤜 -------> XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXלהשלייייייייםםםםםםםם
-##  architecture
+##  architecture MVC
+
+
+
 ##  Preliminary requirements
 
 Make sure that all the libraries must be installed
