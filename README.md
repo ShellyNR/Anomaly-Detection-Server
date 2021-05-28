@@ -15,12 +15,12 @@ In our project להשלים
 ##  Preliminary requirements
 
 Make sure that all the libraries must be installed
-- [x] `sudo apt install nodejs`
-- [x] express librarie`npm i express`
-- [x]  express-fileupload librarie `npm I express-fileupload`
-- [x] node-fetch librarie `npm install -g node-gyp`
-- [x] node-gyp librarie`Node-gyp configure`
-- [x] node-gyp build `Node-gyp build`
+- [x] nodejs - `sudo apt install nodejs`
+- [x] express librarie - `npm i express`
+- [x]  express-fileupload librarie - `npm I express-fileupload`
+- [x] node-fetch librarie - `npm install -g node-gyp`
+- [x] node-gyp librarie - `Node-gyp configure`
+- [x] node-gyp build - `Node-gyp build`
 
 
 ##  Operating instructions
