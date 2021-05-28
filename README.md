@@ -13,9 +13,11 @@
  `npm i express 
 npm I express-fileupload `
 - [x] node
-- [x] `<npm i express>`
-- [x]  `<npm I express-fileupload>`
-- [x]
+- [x] `npm i express`
+- [x]  `npm I express-fileupload`
+- [x] `npm install -g node-gyp`
+- [x] `Node-gyp configure`
+- [ ] - [x] `Node-gyp build`
 
 
 ## setup instructions
