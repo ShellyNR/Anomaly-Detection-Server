@@ -10,14 +10,12 @@
 ##  Preliminary requirements
 
 
- `npm i express 
-npm I express-fileupload `
-- [x] node
+- [x] `sudo apt install nodejs`
 - [x] `npm i express`
 - [x]  `npm I express-fileupload`
 - [x] `npm install -g node-gyp`
 - [x] `Node-gyp configure`
-- [ ] - [x] `Node-gyp build`
+- [x] `Node-gyp build`
 
 
 ## setup instructions
