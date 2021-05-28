@@ -18,8 +18,6 @@ Make sure that all the libraries must be installed
 - [x] `Node-gyp build`
 
 
-## setup instructions
-
 ##  Operating instructions
 
 - [x] Opening screen
