@@ -7,7 +7,8 @@
 ## 📽️ Demonstration Video
 🤜 -------> XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXלהשלייייייייםםםםםםםם
 ##  architecture MVC
-The Model-View-Controller (MVC) is an architectural pattern that separates an application into three main logical components: the model, the view, and the controller. Each of these components are built to handle specific development aspects of an application. (Taken from Wikipedia)
+The Model-View-Controller (MVC) is an architectural pattern that separates an application into three main logical components: the model, the view, and the controller. Each of these components are built to handle specific development aspects of an application. (Taken from tutorialspoint Web)
+In our project להשלים 
 
 
 
