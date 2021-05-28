@@ -38,7 +38,7 @@ function jsonToTable(obj) {
 }
 
 app.post('/upload',(req, res) => {
-    res.write('Processing...\n')
+    // res.write('Processing...\n')
 
     if ("TrainFile" in req.files && "TestFile" in req.files) {
         var test_data = req.files.TestFile.data
@@ -64,17 +64,19 @@ app.post('/upload',(req, res) => {
         console.log("Received files.\nDetecting...")
         api.detectAnomalies(simpleHybridFlag)
         const anomalies = require(__basedir + 'files/anomaly-report.json');
-
-        for (var o in anomalies) {
-            res.write(o + ". " + anomalies[o].cor_feat + ": " + anomalies[o].time+'\n')            
-        }
-        console.log("Finished Detection.")
+        // for (var o in anomalies) {
+        //     res.write(o + ". " + anomalies[o].cor_feat + ": " + anomalies[o].time+'\n')            
+        // }
+        // console.log("Finished Detection.")
+        var data = JSON.parse(fs.readFileSync(__basedir + "files/anomaly-report.json"));    
         fs.unlinkSync(__basedir + "files/test.csv")
         fs.unlinkSync(__basedir + "files/train.csv")
         fs.unlinkSync(__basedir + "files/anomaly-report.json")
     }
-
-    res.write('Finished.\n')
+    
+    res.json(data)
+    // res.write('Finished.\n')
+    
     res.end()
 })
 
