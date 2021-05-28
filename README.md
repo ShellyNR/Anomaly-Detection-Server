@@ -6,12 +6,12 @@
 ## 📽️ Demonstration Video
 🤜 -------> XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXלהשלייייייייםםםםםםםם
 
-##  architecture MVC
+##  Architecture MVC
 The Model-View-Controller (MVC) is an architectural pattern that separates an application into three main logical components: the model, the view, and the controller. Each of these components are built to handle specific development aspects of an application. (The explanation taken from tutorialspoint Web)
-In our project the user choose the type of algorithm (linear or hybrid), in addition the user uploads to the server (by the `view) the two CSV files (train csv, test csv). 
-The files and the flag (which indicates the type of algorithm) are then transferred to the `controller` which transfers the information from the CSV files to the json file.
-The controller saves the json files and passes their address to the model.
-The model sends the information to the requested algorithm (which is coded in the CPP) and returns the result to the controller.
+In our project the user choose the type of algorithm (linear or hybrid), in addition the user uploads to the server (by the  `<view>`) the two CSV files (train csv, test csv). 
+The files and the flag (which indicates the type of algorithm) are then transferred to the `<controller>` which transfers the information from the CSV files to the json file.
+The  `<controller>` saves the json files and passes their address to the  `<model>`.
+The  `<model>` sends the information to the requested algorithm (which is coded in the CPP) and returns the result to the  `<controller>`.
 
 
 
