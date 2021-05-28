@@ -9,7 +9,6 @@
 
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
 	threshold = 0.9;
-	cout<<"Simple Anomaly Detector Constructor"<<endl;
 }
 
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {

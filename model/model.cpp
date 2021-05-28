@@ -30,14 +30,13 @@ namespace model {
 	for(int i=0; i < vecSize; i++) {
 		key = aR[i].description;
 		val = to_string(aR[i].timeStep);
-		printf("key: %s, val: %s\n", key.c_str(), val.c_str());
 		if (i != vecSize - 1)
 			jsonString += "{\"" +key + "\"" + ": " + "\"" + val + "\"" + "},";
 		else
 			jsonString += "{\"" +key + "\"" + ": " + "\"" + val + "\"}";
 	}
 	ofstream myfile;
-	myfile.open ("/home/nir/GitProjects/Anomaly-Detection-Server/files/example.json");
+	myfile.open ("../files/example.json");
 	myfile << jsonString;
 	myfile.close();
     }
@@ -47,16 +46,13 @@ namespace model {
 
         Local<Context> context = isolate->GetCurrentContext();
         Local<Object> obj = Object::New(isolate);
-
         //------------------------------------------------------------//
         // passing integer from controller to model
-        int simpleHybridFlag = (int)args[2].As<Number>()->Value();
+        int simpleHybridFlag = (int)args[0].As<Number>()->Value();
         //------------------------------------------------------------//
-        TimeSeries trainTS("/home/nir/GitProjects/Anomaly-Detection-Server/files/train.csv");
-        TimeSeries testTS("/home/nir/GitProjects/Anomaly-Detection-Server/files/test.csv");
+        TimeSeries trainTS("../files/train.csv");
+        TimeSeries testTS("../files/test.csv");
         //----------------------------------------------------------------------------//
-        // FOR TESTSING ONLY
-        simpleHybridFlag = 2;
         // using SimpleAnomalyDetector        
         if (simpleHybridFlag == 1) {
             SimpleAnomalyDetector ad;
@@ -79,7 +75,7 @@ namespace model {
     }
 
     void Initialize(Local<Object> exports) {
-        NODE_SET_METHOD(exports, "calc", Method);
+        NODE_SET_METHOD(exports, "detectAnomalies", Method);
     }
 
     NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize);
