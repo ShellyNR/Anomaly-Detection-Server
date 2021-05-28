@@ -73,8 +73,9 @@ app.post('/upload',(req, res) => {
         fs.unlinkSync(__basedir + "files/train.csv")
         fs.unlinkSync(__basedir + "files/anomaly-report.json")
     }
-    res.end()
 
+    res.write('Finished.\n')
+    res.end()
 })
 
 app.listen(8080)
