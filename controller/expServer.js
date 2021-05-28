@@ -8,47 +8,18 @@ const fetch = require("node-fetch");
 app.use(express.static('/home/nir/GitProjects/Anomaly-Detection-Server/view/'))
 app.use(fileUpload())
 
+global.__basedir = __dirname.replace("/controller",'/');
+
+
 // if false- reads data as pairs of keys and values.
 app.use(express.urlencoded({
     extended: false
 }))
 
 app.get('/', (req, res)=> {
-    res.sendFile('/home/nir/GitProjects/Anomaly-Detection-Server/view/view.html')
+    res.sendFile(__basedir +'view/view.html')
 })
 
-
-
-/**
-app.post('/upload',(req, res) => {
-    //console.log(req.files.TrainFile)
-    //res.write(req.files.TrainFile.toString())
-    res.write(api.calc(path.dirname(req.files.TrainFile.name.toString()), req.files.TestFile.name, 1).msg)
-    /** 
-    res.write('Processing')
-    if (req.files.TrainFile != null && req.files.TestFile != null) {
-        var train = req.files.TrainFile
-        var test = req.files.TestFile
-        // train.data.toString(), test.data.toString()
-    }
-    
-    res.end()
-
-})
-**/
-
-function jsonToTable(obj) {
-    var ret = "";
-    for (var o in obj) {
-        var data = obj[o];
-        if (typeof data !== 'object') {
-            ret += "<li>" + o + " : " + data + "</li>";
-        } else {
-            ret += "<li>" + o + " : " + jsonToTable(data) + "</li>";
-        }
-    }
-    return "<ul>" + ret + "</ul>";
-}
 
 app.post('/upload',(req, res) => {
     //res.write('Processing')
@@ -70,34 +41,16 @@ app.post('/upload',(req, res) => {
         //     }
         // }); 
         
-        console.log(model)
         
-        api.calc(1)
+        var simpleHybridFlag
 
-        jsonAnomaly = {
-            "1": {
-                "f1": "alt",
-                "f2": "speed",
-                "lineNum": "12"
-            },
-            "2": {
-                "f1": "bar",
-                "f2": "shelly",
-                "lineNum": "20"
-            },
-            "3": {
-                "f1": "roi",
-                "f2": "nir",
-                "lineNum": "55"
-            },
-            "4": {
-                "f1": "Tel aviv",
-                "f2": "Ramat gan",
-                "lineNum": "2"
-            },
+        if (model === "linear")
+            simpleHybridFlag = 1
+        else
+            simpleHybridFlag = 2
 
-        }
-
+        api.calc(simpleHybridFlag)
+        
         const anomalies = require('../files/anomaly-report.json');
 
         for (var o in anomalies) {
