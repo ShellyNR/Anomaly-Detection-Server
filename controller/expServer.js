@@ -14,6 +14,9 @@ const { StringDecoder } = require('string_decoder')
 app.use(express.static(__basedir + '/view/'))
 app.use(fileUpload())
 
+global.__basedir = __dirname.replace("/controller",'/');
+
+
 // if false- reads data as pairs of keys and values.
 app.use(express.urlencoded({
     extended: false
@@ -23,6 +26,7 @@ app.get('/', (req, res)=> {
     res.sendFile(__basedir +'view/view.html')
 })
 
+<<<<<<< HEAD
 function jsonToTable(obj) {
     var ret = "";
     for (var o in obj) {
@@ -35,6 +39,8 @@ function jsonToTable(obj) {
     }
     return "<ul>" + ret + "</ul>";
 }
+=======
+>>>>>>> df07931b3b04db4c0fa55462d16ee8510ef3bf7f
 
 app.post('/upload',(req, res) => {
     res.write('Processing...\n')
@@ -43,6 +49,7 @@ app.post('/upload',(req, res) => {
         var test_data = req.files.TestFile.data
         var train_data = req.files.TrainFile.data
         var model = req.body.models
+<<<<<<< HEAD
         var simpleHybridFlag
         if (model === "linear")
             simpleHybridFlag = 1
@@ -62,7 +69,31 @@ app.post('/upload',(req, res) => {
         }); 
         
         api.detectAnomalies(simpleHybridFlag)
+=======
+        // var fs = require('fs')
 
+        // fs.writeFile("/home/nir/GitProjects/Anomaly-Detection-Server/files/test.csv", test_data, function(err) {
+        //     if(err) {
+        //         return console.log(err)
+        //     }
+        // }); 
+        // fs.writeFile("/home/nir/GitProjects/Anomaly-Detection-Server/files/train.csv", train_data, function(err) {
+        //     if(err) {
+        //         return console.log(err)
+        //     }
+        // }); 
+        
+        
+        var simpleHybridFlag
+
+        if (model === "linear")
+            simpleHybridFlag = 1
+        else
+            simpleHybridFlag = 2
+>>>>>>> df07931b3b04db4c0fa55462d16ee8510ef3bf7f
+
+        api.calc(simpleHybridFlag)
+        
         const anomalies = require('../files/anomaly-report.json');
 
         for (var o in anomalies) {
