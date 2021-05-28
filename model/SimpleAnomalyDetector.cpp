@@ -1,7 +1,7 @@
 /*
  * SimpleAnomalyDetector.cpp
  *
- *  Created on: 8 баечЧ 2020
+ *  Created on: 8 пїЅпїЅпїЅпїЅпїЅ 2020
  *      Author: Eli
  */
 
@@ -9,7 +9,7 @@
 
 SimpleAnomalyDetector::SimpleAnomalyDetector() {
 	threshold = 0.9;
-
+	cout<<"Simple Anomaly Detector Constructor"<<endl;
 }
 
 SimpleAnomalyDetector::~SimpleAnomalyDetector() {

@@ -37,7 +37,7 @@ namespace model {
 			jsonString += "{\"" +key + "\"" + ": " + "\"" + val + "\"}";
 	}
 	ofstream myfile;
-	myfile.open ("./test/example.json");
+	myfile.open ("/home/nir/GitProjects/Anomaly-Detection-Server/files/example.json");
 	myfile << jsonString;
 	myfile.close();
     }
@@ -52,12 +52,11 @@ namespace model {
         // passing integer from controller to model
         int simpleHybridFlag = (int)args[2].As<Number>()->Value();
         //------------------------------------------------------------//
-        
-        
-        TimeSeries trainTS("./files/trainFile.csv");
-        TimeSeries testTS("./files/testFile.csv");
-
+        TimeSeries trainTS("/home/nir/GitProjects/Anomaly-Detection-Server/files/train.csv");
+        TimeSeries testTS("/home/nir/GitProjects/Anomaly-Detection-Server/files/test.csv");
         //----------------------------------------------------------------------------//
+        // FOR TESTSING ONLY
+        simpleHybridFlag = 2;
         // using SimpleAnomalyDetector        
         if (simpleHybridFlag == 1) {
             SimpleAnomalyDetector ad;
