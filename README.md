@@ -11,7 +11,7 @@
 
 ##  Operating instructions
 
-- [x] The screen opens
+- [x] Opening screen
 ![image](https://user-images.githubusercontent.com/73064092/119977317-f16cd680-bfc0-11eb-9983-eab9e743a589.png)
 
 - [x] After selecting the model and uploading the required files, press the `<Submit Query>` button
