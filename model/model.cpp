@@ -24,19 +24,25 @@ namespace model {
     using namespace std;
 
     void vecToJson(std::vector<AnomalyReport> aR) {
-	string jsonString;
+	string jsonString = "[";
 	string key, val;
+    string cor_feat = "cor_feat", time = "time";
 	int vecSize = aR.size();
 	for(int i=0; i < vecSize; i++) {
 		key = aR[i].description;
-		val = to_string(aR[i].timeStep);
-		if (i != vecSize - 1)
-			jsonString += "{\"" +key + "\"" + ": " + "\"" + val + "\"" + "},";
-		else
-			jsonString += "{\"" +key + "\"" + ": " + "\"" + val + "\"}";
+		val = to_string(aR[i].timeStep);		
+		if (i != vecSize - 1) {
+			jsonString += "{\"" + cor_feat + "\"" + ": " + "\"" + key + "\",";
+            jsonString +=  "\"" + time + "\"" + ": " + "\"" + val + "\"" + "},";
+        }
+		else {
+            jsonString += "{\"" + cor_feat + "\"" + ": " + "\"" + key + "\",";
+            jsonString +=  "\"" + time + "\"" + ": " + "\"" + val + "\"" + "}";
+        }
 	}
 	ofstream myfile;
-	myfile.open ("../files/example.json");
+	myfile.open ("../files/anomaly-report.json");
+    jsonString += "]";
 	myfile << jsonString;
 	myfile.close();
     }
@@ -46,6 +52,7 @@ namespace model {
 
         Local<Context> context = isolate->GetCurrentContext();
         Local<Object> obj = Object::New(isolate);
+
         //------------------------------------------------------------//
         // passing integer from controller to model
         int simpleHybridFlag = (int)args[0].As<Number>()->Value();
