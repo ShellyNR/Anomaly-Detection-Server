@@ -8,6 +8,16 @@
 🤜 -------> XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXלהשלייייייייםםםםםםםם
 ##  architecture
 ##  Preliminary requirements
+
+
+ `npm i express 
+npm I express-fileupload `
+- [x] node
+- [x] `<npm i express>`
+- [x]  `<npm I express-fileupload>`
+- [x]
+
+
 ## setup instructions
 
 ##  Operating instructions
