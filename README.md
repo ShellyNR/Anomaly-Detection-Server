@@ -16,11 +16,11 @@ In our project להשלים
 
 Make sure that all the libraries must be installed
 - [x] `sudo apt install nodejs`
-- [x] `npm i express`
-- [x]  `npm I express-fileupload`
-- [x] `npm install -g node-gyp`
-- [x] `Node-gyp configure`
-- [x] `Node-gyp build`
+- [x] express librarie`npm i express`
+- [x]  express-fileupload librarie `npm I express-fileupload`
+- [x] node-fetch librarie `npm install -g node-gyp`
+- [x] node-gyp librarie`Node-gyp configure`
+- [x] node-gyp build `Node-gyp build`
 
 
 ##  Operating instructions
