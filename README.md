@@ -13,7 +13,7 @@ The files and the flag (which indicates the type of algorithm) are then transfer
 The  `<controller>` saves the json files and passes their address to the  `<model>`.
 The  `<model>` sends the information to the requested algorithm (which is coded in the CPP) and returns the result to the  `<controller>`.
 
-`<XXX>`
+
 
 ##  Preliminary requirements
 
