@@ -65,8 +65,6 @@ app.post('/upload',(req, res) => {
         }); 
         
         api.detectAnomalies(simpleHybridFlag)
-
-        api.calc(simpleHybridFlag)
         
         const anomalies = require('../files/anomaly-report.json');
 
