@@ -15,7 +15,7 @@ The  `<model>` sends the information to the requested algorithm (which is coded 
 
 
 
-#  Preliminary requirements
+##  Preliminary requirements
 
 Make sure that all the libraries must be installed
 - [x] nodejs - `sudo apt install nodejs`
