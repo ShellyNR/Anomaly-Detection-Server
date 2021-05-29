@@ -4,14 +4,13 @@ global.__basedir = __dirname.replace("/controller",'/');
 const express = require('express')
 const fileUpload = require ('express-fileupload')
 const app = express()
-const api = require(__basedir + '/model/build/Release/model')
+const api = require(__basedir + 'model/build/Release/model')
 console.log("Server Running")
 const path = require('path')
 const fetch = require("node-fetch");
 const { StringDecoder } = require('string_decoder')
 
-
-app.use(express.static(__basedir + '/view/'))
+app.use(express.static(__basedir + 'view'))
 app.use(fileUpload())
 
 
@@ -24,22 +23,7 @@ app.get('/', (req, res)=> {
     res.sendFile(__basedir + 'view/view.html')
 })
 
-function jsonToTable(obj) {
-    var ret = "";
-    for (var o in obj) {
-        var data = obj[o];
-        if (typeof data !== 'object') {
-            ret += "<li>" + o + " : " + data + "</li>";
-        } else {
-            ret += "<li>" + o + " : " + jsonToTable(data) + "</li>";
-        }
-    }
-    return "<ul>" + ret + "</ul>";
-}
-
-app.post('/upload',(req, res) => {
-    // res.write('Processing...\n')
-
+function calc(req){
     if ("TrainFile" in req.files && "TestFile" in req.files) {
         var test_data = req.files.TestFile.data
         var train_data = req.files.TrainFile.data
@@ -64,19 +48,25 @@ app.post('/upload',(req, res) => {
         console.log("Received files.\nDetecting...")
         api.detectAnomalies(simpleHybridFlag)
         const anomalies = require(__basedir + 'files/anomaly-report.json');
-        // for (var o in anomalies) {
-        //     res.write(o + ". " + anomalies[o].cor_feat + ": " + anomalies[o].time+'\n')            
-        // }
-        // console.log("Finished Detection.")
         var data = JSON.parse(fs.readFileSync(__basedir + "files/anomaly-report.json"));    
         fs.unlinkSync(__basedir + "files/test.csv")
         fs.unlinkSync(__basedir + "files/train.csv")
         fs.unlinkSync(__basedir + "files/anomaly-report.json")
+        return data;        
     }
-    
-    res.json(data)
-    // res.write('Finished.\n')
-    
+}
+
+app.post('/upload',(req, res) => {
+    var anomalies = calc(req)    
+    res.json(data)    
+    res.end()
+})
+
+app.post('/uploadAndPrint',(req, res) => {
+    var anomalies = calc(req)    
+    for (var o in anomalies) {
+        res.write(o + ". " + anomalies[o].cor_feat + ": " + anomalies[o].time+'\n')            
+    }
     res.end()
 })
 
