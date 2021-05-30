@@ -31,7 +31,8 @@ Make sure that all the libraries must be installed
 ## How to build
 first, in model directoy:
 - [x] node-gyp configure - `Node-gyp configure`
-- [x] node-gyp build - `Node-gyp build`<br/>
+- [x] node-gyp build - `Node-gyp build`
+
 after that, in controller directory:
 - [x] start server - `node expServer.js`
 
