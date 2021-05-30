@@ -29,11 +29,11 @@ Make sure that all the libraries must be installed
 - [x] node-gyp library - `npm install -g node-gyp`
 
 ## How to build
-first, in model directoy:
-- [x] node-gyp configure - `Node-gyp configure`
-- [x] node-gyp build - `Node-gyp build`
-
-after that, in controller directory:
+1. init node server - `npm init`
+2. in model directoy:
+ - [x] node-gyp configure - `Node-gyp configure`
+ - [x] node-gyp build - `Node-gyp build`
+3. in controller directory:
 - [x] start server - `node expServer.js`
 
 ##  Operating instructions
