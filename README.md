@@ -7,6 +7,9 @@ The web presents to the pilot all of the anomaly from is flight's data.
 
 
 ## 📽️ Demonstration Video
+link to the video:
+
+https://www.youtube.com/watch?v=M8LlPB5nqvE
 
 
 ##  Architecture MVC
@@ -17,27 +20,41 @@ The  `<controller>` saves the json files and passes their address to the  `<mode
 The  `<model>` sends the information to the requested algorithm (which is coded in the CPP) and returns the result to the  `<controller>`.
 
 
-
 ##  Preliminary requirements
-
 Make sure that all the libraries must be installed
 - [x] this server should run on linux.
 - [x] nodejs - `sudo apt install nodejs`
 - [x] express library - `npm i express`
-- [x] express-fileupload library - `npm I express-fileupload`
+- [x] express-fileupload library - `npm i express-fileupload`
 - [x] node-fetch library - `npm install -g node-gyp`
 - [x] node-gyp library - `npm install -g node-gyp`
+
 
 ## How to build
 1. init node server - `npm init`
 2. in model directoy:
- - [x] node-gyp configure - `Node-gyp configure`
- - [x] node-gyp build - `Node-gyp build`
+ - [x] node-gyp configure - `node-gyp configure`
+ - [x] node-gyp build - `node-gyp build`
 3. in controller directory:
 - [x] start server - `node expServer.js`
 
-##  Operating instructions
 
+## API Request Format
+
+The request body must be as the format below:
+
+- [x] <model_name><train_file><test_file>
+
+- [x] curl example:
+
+```
+curl --location --request POST 'localhost:8080/upload' \
+--form '="hybrid"' \
+--form 'TrainFile=@"/home/user/Anomaly-Detection-Server/files/trainFile.csv"' \
+--form 'TestFile=@"/home/user/Anomaly-Detection-Server/files/testFile.csv"'
+```
+
+##  Operating instructions
 - [x] Opening screen
 ![image](https://user-images.githubusercontent.com/73064092/119977317-f16cd680-bfc0-11eb-9983-eab9e743a589.png)
 
