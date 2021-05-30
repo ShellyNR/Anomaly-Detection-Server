@@ -58,7 +58,8 @@ function calc(req){
 
 app.post('/upload',(req, res) => {
     var anomalies = calc(req)    
-    res.json(data)    
+    res.json(anomalies)
+    console.log("Finished.") 
     res.end()
 })
 
@@ -67,6 +68,7 @@ app.post('/uploadAndPrint',(req, res) => {
     for (var o in anomalies) {
         res.write(o + ". " + anomalies[o].cor_feat + ": " + anomalies[o].time+'\n')            
     }
+    console.log("Finished.")
     res.end()
 })
 
