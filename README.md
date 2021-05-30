@@ -7,7 +7,7 @@ The web presents to the pilot all of the anomaly from is flight's data.
 
 
 ## 📽️ Demonstration Video
-🤜 -------> XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXלהשלייייייייםםםםםםםם
+
 
 ##  Architecture MVC
 The `<Model-View-Controller>` (MVC) is an architectural pattern that separates an application into three main logical components: the `<model>`, the `<view>`, and the `<controller>`. Each of these components are built to handle specific development aspects of an application. (The explanation taken from tutorialspoint Web).
