@@ -21,13 +21,19 @@ The  `<model>` sends the information to the requested algorithm (which is coded 
 ##  Preliminary requirements
 
 Make sure that all the libraries must be installed
+- [x] this server should run on linux.
 - [x] nodejs - `sudo apt install nodejs`
-- [x] express librarie - `npm i express`
-- [x]  express-fileupload librarie - `npm I express-fileupload`
-- [x] node-fetch librarie - `npm install -g node-gyp`
-- [x] node-gyp librarie - `Node-gyp configure`
-- [x] node-gyp build - `Node-gyp build`
+- [x] express library - `npm i express`
+- [x] express-fileupload library - `npm I express-fileupload`
+- [x] node-fetch library - `npm install -g node-gyp`
+- [x] node-gyp library - `npm install -g node-gyp`
 
+## How to build
+first, in model directoy:
+- [x] node-gyp configure - `Node-gyp configure`
+- [x] node-gyp build - `Node-gyp build`
+after that, in controller directory:
+- [x] start server - `node expServer.js`
 
 ##  Operating instructions
 
